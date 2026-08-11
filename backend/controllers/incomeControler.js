@@ -25,18 +25,33 @@ exports.addIncome = async (req, res, next) => {
         res.status(200).json(newIncome)
 
     } catch(error){
-        res.status(500).json({message: "Server Error"})
+        res.status(500).json({message: "Erro no servidor"})
     }
 }
+
 // Pega toda a renda
 exports.getAllIncome = async (req, res, next) => {
+    const userId = req.user.id
+
+    try{
+        const income = await Income.find({userId}).sort({date: -1})
+        res.json(income)
+    } catch(error){
+        res.status(500).json({message: "Erro no servidor"})
+    }
 
 }
 // Deleta a renda
 exports.deleteIncome = async (req, res, next) => {
-
+    try{
+        await Income.findByIdAndDelete(req.params.id)
+        res.json({message: "Receita deletada com sucesso"})
+    } catch(error) {
+        res.status(500).json({message: "Erro no servidor"})
+    }
 }
 // Download da renda em formato Excel
 exports.downloadIncomeExcel = async (req, res, next) => {
+        const userId = req.user.id
 
 }
