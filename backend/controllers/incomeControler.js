@@ -1,4 +1,5 @@
 const User = require("../models/User")
+const xlsx = require('xlsx')
 const Income = require("../models/Income")
 
 
@@ -52,6 +53,26 @@ exports.deleteIncome = async (req, res, next) => {
 }
 // Download da renda em formato Excel
 exports.downloadIncomeExcel = async (req, res, next) => {
-        const userId = req.user.id
+    const userId = req.user.id
+    try {
+        const income = await Income.find({userId}).sort({date: -1})
+        
+        // Mapeamento corrigido
+        const data = income.map(item => ({
+            Source: item.source,
+            Amount: item.amount,
+            Date: item.date
+        }))
 
+        const wb = xlsx.utils.book_new()
+        const ws = xlsx.utils.json_to_sheet(data)
+        
+        // "utils" no plural corrigido
+        xlsx.utils.book_append_sheet(wb, ws, "Income") 
+        
+        xlsx.writeFile(wb, 'income_details.xlsx')
+        res.download('income_details.xlsx')
+    } catch (error) {
+        res.status(500).json({message: "Erro no servidor"})
+    }
 }
