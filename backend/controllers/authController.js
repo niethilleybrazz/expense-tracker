@@ -12,14 +12,14 @@ exports.registerUser = async (req, res, next) => {
 
     // Validacoes
     if (!fullName || !email || !password) {
-        return res.status(400).json({ message: "Todos os campos devem ser preenchidos" });
+        return res.status(400).json({ message: "Todos os campos devem ser preenchidos" })
     }
 
     try {
         // Checa se o email ja existe
         const existingUser = await User.findOne({ email });
         if (existingUser) {
-            return res.status(400).json({ message: "Email já em uso" });
+            return res.status(400).json({ message: "Email já em uso" })
         }
 
         const user = await User.create({

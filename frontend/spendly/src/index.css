@@ -7,8 +7,9 @@
   --font-secondary: 'Cairo', sans-serif;
   --color-background01: #101010;
   --color-background02: #19191B;
-  --color-borders: #393A40;
+  --color-borders : #393a4054;
   --color-text: #EEEEF0;
+  --color-text-fade: #90a1b9d5;
   --color-contrast: #0AC251;
   --color-contrast-100: #0bd558c1;
   --color-error:#fd8083;

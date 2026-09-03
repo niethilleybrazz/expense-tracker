@@ -18,17 +18,20 @@ const Login = () => {
 
   // Handle Login
   const handleLogin = async (e) => {
-    e.preventDefault(); 
+  e.preventDefault(); 
 
-    if(!validateEmail(email)){
-      setError("Opa! Coloque um email válido.")
-      return
-    }
-    if(!validatePassword(password)){
-      setError("Opa! Insira uma senha válida.")
-      return
-    }
-    setError("")
+  if(!validateEmail(email)){
+    setError("Opa! Coloque um email válido.")
+    return
+  }
+
+  const passwordError = validatePassword(password); 
+  if (passwordError) {
+    setError(passwordError);
+    return;
+  }
+
+  setError("")
 
     // API 
     try {
@@ -45,11 +48,11 @@ const Login = () => {
         navigate("/dashboard")
       }
     } catch (error){
-      if(error.response && error.response.data.message){
-        setError(error.response.data.message)
-      } else {
-        setError("Algo deu errado. Por favor tente novamente")
-      }
+        if(error.response?.data?.message){
+          setError(error.response.data.message)
+        } else {
+          setError("Algo deu errado. Por favor tente novamente")
+        }
     }
   };
 

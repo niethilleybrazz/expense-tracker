@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { validateEmail } from "../../utils/helper";
+import { validateEmail, validatePassword } from "../../utils/helper";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import Input from "../../components/inputs/Input";
 import ProfilePhotoSelector from "../../components/inputs/ProfilePhotoSelector";
@@ -32,9 +32,11 @@ const SignUp = () => {
       setError("Por favor, adicione um email válido!")
       return
     }
-    if(!password){
-      setError("Por favor, adicione uma senha!")
-      return
+
+    const passwordError = validatePassword(password); 
+    if (passwordError) {
+      setError(passwordError);
+      return;
     }
 
     setError("")

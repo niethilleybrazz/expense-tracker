@@ -4,11 +4,9 @@ export const validateEmail = (email) => {
 };
 
 export const validatePassword = (password) => {
-  if (!password) return false;
-
-  const minLength = 8;
-  const hasLetter = /[a-zA-Z]/.test(password);
-  const hasNumber = /[0-9]/.test(password);
-
-  return password.length >= minLength && hasLetter && hasNumber;
+  if (!password) return "A senha é obrigatória."
+  if (password.length < 8) return "A senha deve ter no mínimo 8 caracteres."
+  if (!/[a-zA-Z]/.test(password)) return "A senha deve conter pelo menos uma letra."
+  if (!/[0-9]/.test(password)) return "A senha deve conter pelo menos um número."
+  return null
 };
