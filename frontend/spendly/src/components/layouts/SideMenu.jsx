@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { SIDE_MENU_DATA } from '../../utils/data'
 import { UserContext } from '../../context/userContext'
 import { useNavigate } from 'react-router-dom'
@@ -24,8 +24,8 @@ const SideMenu = ({ activeMenu }) => {
   return (
     <div className="w-64 h-[calc(100vh-61px)] border-r border-borders p-5 sticky top-15.25 z-30">
       <div className="flex flex-col items-center justify-center gap-3 mt-3 mb-7">
-        {user?.profileImage ? (
-          <img src={user?.profileImageUrl || ""} alt="Imagem de Perfil" className="" />
+        {user?.profileImageUrl ? (
+          <img src={user.profileImageUrl || ""} alt="Imagem de Perfil" className="w-20 h-20 rounded-full" />
         ) : <></>}
 
         <h5 className="text-text font-medium leading-6">

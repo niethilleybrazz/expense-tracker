@@ -1,18 +1,17 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useCallback } from "react";
 
 export const UserContext = createContext()
 const UserProvider = ({children}) => {
     const [user, setUser] = useState(null)
     
     // Atuliza dados do usuario
-    const updateUser = (userData) => {
+    const updateUser = useCallback((userData) => {
         setUser(userData)
-    }
+    }, [])
 
-    // Limpa os dados
-    const clearUser = () => {
+    const clearUser = useCallback(() => {
         setUser(null)
-    }
+    }, [])
 
     return (
         <UserContext.Provider
